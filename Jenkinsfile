@@ -12,7 +12,7 @@ pipeline{
         string(name: 'DockerHubUser', description: "name of the Application", defaultValue: 'ronniekulkarni')
     }
 
-    stages{
+    stages{.
          
         stage('Git Checkout'){
                     when { expression {  params.action == 'create' } }
@@ -69,6 +69,16 @@ pipeline{
                script{
                    
                    mvnBuild()
+               }
+            }
+        }
+
+        stage('Push JAR to JFrog : python'){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{
+                   
+                   jarPush()
                }
             }
         }
